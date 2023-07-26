@@ -78,24 +78,24 @@ const englishAlphabet = [
 const lettersInfo = englishAlphabet.map(letter => ({
   letter,
   capitalizedLetter: letter.toUpperCase(),
-  mustPressLeftShift: "yuiophjklnm".includes(letter)
+  mustPressLeftShift: "yuiophbjklnm".includes(letter)
 }))
 
 let alphabetStack = iterativeShuffleArray(englishAlphabet)
 
 // config
-const scoreDecrementAmount_WrongShift = 1
+const scoreDecrementAmount_WrongShift = 4
 const scoreDecrementAmount_WrongLetter = 2
-const scoreDecrementAmount_TimeOut = 1
-const scoreIncrementAmount = 5
+const scoreDecrementAmount_TimeOut = 2
+const scoreIncrementAmount = 10
 
 let score = 0
 let lettersRemaining = alphabetStack.length
 
-const scoreMultiplier = 100
+const scoreMultiplier = 200
 let scoreMultiplier_current = scoreMultiplier
-let scoreMultiplier_decay = 1
-let scoreMultiplier_updateInterval_MS = 50
+let scoreMultiplier_decay = 0.1 * scoreMultiplier
+let scoreMultiplier_updateInterval_MS = 200
 
 const remove1LetterFromTheAlphabetStackAndUpdateUI = () => {
   if (alphabetStack.length === 1) {
@@ -200,6 +200,8 @@ if streak is 0 or broken current and max streak
 
  then if 2 answers given right then it shows it
 
+ - when you streak like 5, then amount that fills gets decreased by a curve (like 10% off current value)
+
  */
 
 /* TODO: Toggle Hide Scores */
@@ -215,3 +217,9 @@ if streak is 0 or broken current and max streak
 
 
 */
+
+/*TODO: Add Responsiveness */
+
+/* TODO: Add documentation */
+
+/*TODO: Add sounds for right and wrong */
