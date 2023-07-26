@@ -184,16 +184,12 @@ setInterval(() => {
   )
   scoreMultiplierBarEl.style.transform = `scaleX(
     ${scoreMultiplier_current / scoreMultiplier})`
-
   if (scoreMultiplier_current === 1) {
     score -=
       (scoreDecrementAmount_TimeOut * scoreMultiplier) /
       scoreMultiplier_updateInterval_MS
     updateScoreInUI(score)
   }
-
-  console.log(`scaleX(
-    ${scoreMultiplier_current / scoreMultiplier})`)
 }, scoreMultiplier_updateInterval_MS)
 
 /* TODO: Add a system that increases the multiplier when you type 2 write letters
