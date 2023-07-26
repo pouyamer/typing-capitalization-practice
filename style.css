@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --hue-1: 50;
+  --hue-2: 220;
+
+  --darker-color-1: hsl(var(--hue-1), 60%, 10%);
+  --darker-color-2: hsl(var(--hue-2), 60%, 10%);
+  --darker-danger-color: hsl(0, 60%, 10%);
+
+  --lighter-color-1: hsl(var(--hue-1), 80%, 80%);
+  --lighter-color-2: hsl(var(--hue-2), 80%, 80%);
+  --lighter-danger-color: hsl(0, 80%, 85%);
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  height: 100vh;
+
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+}
+
+.container[data-which-shift="right"] {
+  background-color: var(--lighter-color-1);
+}
+
+.container[data-which-shift="left"] {
+  background-color: var(--lighter-color-2);
+}
+
+.container.wrong {
+  animation: wrong-pressed-for-darker-bgcolor 0.8s ease-in-out;
+}
+
+.indicator {
+  opacity: 0;
+}
+
+.container[data-which-shift="right"] .indicator {
+  background-color: var(--darker-color-1);
+}
+
+.container[data-which-shift="left"] .indicator {
+  background-color: var(--darker-color-2);
+}
+
+/* If the data-which-shift of a container matches
+   with its respective indicator,
+   it gets active */
+
+.container[data-which-shift="right"] .indicator.right,
+.container[data-which-shift="left"] .indicator.left {
+  opacity: 0.75;
+}
+
+.indicator.active.wrong {
+  animation: wrong-pressed-for-lighter-bgcolor 0.8s ease-in-out;
+}
+
+.letter {
+  font-size: 20rem;
+  font-weight: 700;
+  width: 75%;
+  margin: 0 auto;
+
+  display: grid;
+  place-content: center;
+
+  position: relative;
+  align-self: center;
+}
+
+.score-multiplier {
+  height: 5px;
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 150ms ease-out;
+  border-radius: 4em;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  opacity: 0.4;
+
+  background-color: #111;
+}
+
+.container[data-which-shift="right"] .letter {
+  color: var(--darker-color-1);
+}
+.container[data-which-shift="left"] .letter {
+  color: var(--darker-color-2);
+}
+
+.letter.wrong {
+  animation: wrong-pressed-for-darker-color 0.8s ease-in-out;
+}
+
+.scores {
+  font-size: 1.2rem;
+  position: absolute;
+
+  top: 0;
+  left: calc(50% - 12ch);
+  text-align: center;
+  opacity: 0.3;
+
+  font-weight: 100;
+
+  padding: 1em;
+}
+
+.scores * {
+  margin-bottom: 0.25em;
+}
+
+@keyframes wrong-pressed-for-darker-bgcolor {
+  0% {
+    background-color: var(--darker-color-1);
+  }
+  70% {
+    background-color: var(--darker-danger-color);
+  }
+
+  100% {
+    background-color: var(--darker-color-1);
+  }
+}
+
+@keyframes wrong-pressed-for-lighter-bgcolor {
+  0% {
+    background-color: var(--lighter-color-1);
+  }
+  70% {
+    background-color: var(--lighter-danger-color);
+  }
+
+  100% {
+    background-color: var(--lighter-color-1);
+  }
+}
+
+@keyframes wrong-pressed-for-darker-color {
+  0% {
+    color: var(--darker-color-1);
+  }
+  70% {
+    color: var(--darker-danger-color);
+  }
+
+  100% {
+    color: var(--darker-color-1);
+  }
+}
