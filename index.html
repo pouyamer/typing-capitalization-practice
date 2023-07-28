@@ -11,33 +11,41 @@
 </head>
 
 <body>
-    <div class="container" data-which-shift="right">
+
+    <div class="container" data-which-shift="right" data-theme="dark">
+        <button class="theme-switcher">
+            Theme
+        </button>
         <div class="indicator left"></div>
         <div class="letter">
-            <p></p>
-            <div class="score-multiplier"></div>
+            <div class="letter-and-multiplier">
+                <p></p>
+                <div class="score-multiplier"></div>
+
+            </div>
+            <div class="scores">
+                <h1 class="score">
+                    Score: <span>0</span>
+                </h1>
+
+                <h5 class="accuracy">Accuracy (<span>100</span>%)</h5>
+                <h3 class="next-letter">
+                    Next Letter: <span>A</span>
+                </h3>
+                <h5 class="letters-remaining">
+                    Letters remaining: <span>0</span>
+                </h5>
+                <h3 class="current-streak">
+                    Current Streak: x<span>0</span>
+                </h3>
+
+                <h5 class="max-streak">Max Streak: x<span>0</span></h5>
+            </div>
         </div>
         <div class="indicator right"></div>
     </div>
 
-    <div class="scores">
-        <h1 class="score">
-            Score: <span>0</span>
-        </h1>
 
-        <h5 class="accuracy">Accuracy (<span>100</span>%)</h5>
-        <h2 class="next-letter">
-            Next Letter: <span>A</span>
-        </h2>
-        <h5 class="letters-remaining">
-            Letters remaining: <span>0</span>
-        </h5>
-        <h2 class="current-streak">
-            Current Streak: x<span>0</span>
-        </h2>
-
-        <h5 class="max-streak">Max Streak: x<span>0</span></h5>
-    </div>
 </body>
 
 </html>
