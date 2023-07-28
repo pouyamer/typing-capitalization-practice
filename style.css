@@ -8,40 +8,58 @@
   box-sizing: border-box;
 }
 
-:root {
+:root:has([data-theme="light"]) {
   --hue-1: 50;
   --hue-2: 220;
 
-  --darker-color-1: hsl(var(--hue-1), 60%, 10%);
-  --darker-color-2: hsl(var(--hue-2), 60%, 10%);
-  --darker-danger-color: hsl(0, 60%, 10%);
+  --main-color-1: hsl(var(--hue-1), 60%, 10%);
+  --main-color-2: hsl(var(--hue-2), 60%, 10%);
+  --main-danger-color: hsl(0, 60%, 10%);
 
-  --lighter-color-1: hsl(var(--hue-1), 80%, 80%);
-  --lighter-color-2: hsl(var(--hue-2), 80%, 80%);
-  --lighter-danger-color: hsl(0, 80%, 85%);
+  --secondary-color-1: hsl(var(--hue-1), 80%, 80%);
+  --secondary-color-2: hsl(var(--hue-2), 80%, 80%);
+  --secondary-danger-color: hsl(0, 80%, 85%);
+}
+
+:root:has([data-theme="dark"]) {
+  --hue-1: 50;
+  --hue-2: 220;
+
+  --main-color-1: hsl(var(--hue-1), 80%, 80%);
+  --main-color-2: hsl(var(--hue-2), 80%, 80%);
+  --main-danger-color: hsl(0, 80%, 85%);
+
+  --secondary-color-1: hsl(var(--hue-1), 60%, 10%);
+  --secondary-color-2: hsl(var(--hue-2), 60%, 10%);
+  --secondary-danger-color: hsl(0, 60%, 10%);
 }
 
 body {
   font-family: "Roboto", sans-serif;
 }
 
+.theme-switcher {
+  position: fixed;
+  z-index: 2;
+}
+
 .container {
   height: 100vh;
 
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-columns: 1fr 4fr 1fr;
 }
 
 .container[data-which-shift="right"] {
-  background-color: var(--lighter-color-1);
+  background-color: var(--secondary-color-1);
 }
 
 .container[data-which-shift="left"] {
-  background-color: var(--lighter-color-2);
+  background-color: var(--secondary-color-2);
 }
 
 .container.wrong {
-  animation: wrong-pressed-for-darker-bgcolor 0.8s ease-in-out;
+  animation: wrong-pressed-for-main-bgcolor 0.8s ease-in-out;
 }
 
 .indicator {
@@ -49,11 +67,11 @@ body {
 }
 
 .container[data-which-shift="right"] .indicator {
-  background-color: var(--darker-color-1);
+  background-color: var(--main-color-1);
 }
 
 .container[data-which-shift="left"] .indicator {
-  background-color: var(--darker-color-2);
+  background-color: var(--main-color-2);
 }
 
 /* If the data-which-shift of a container matches
@@ -66,102 +84,144 @@ body {
 }
 
 .indicator.active.wrong {
-  animation: wrong-pressed-for-lighter-bgcolor 0.8s ease-in-out;
+  animation: wrong-pressed-for-secondary-bgcolor 0.8s ease-in-out;
 }
 
 .letter {
-  font-size: 20rem;
-  font-weight: 700;
-  width: 75%;
   margin: 0 auto;
 
-  display: grid;
-  place-content: center;
+  user-select: none;
 
-  position: relative;
+  display: flex;
+  gap: 1rem;
+
   align-self: center;
+}
+
+.letter-and-multiplier {
+  position: relative;
 }
 
 .score-multiplier {
   height: 5px;
-  position: absolute;
-  width: 100%;
   transform-origin: center;
   transition: transform 150ms ease-out;
   border-radius: 4em;
+
+  position: absolute;
   left: 0;
-  bottom: 0;
+  top: 3rem;
   right: 0;
 
-  opacity: 0.4;
+  width: 75%;
+  margin: 0 auto;
 
-  background-color: #111;
+  opacity: 0.2;
 }
 
-.container[data-which-shift="right"] .letter {
-  color: var(--darker-color-1);
+.container[data-which-shift="right"] .score-multiplier {
+  background-color: var(--main-color-1);
 }
-.container[data-which-shift="left"] .letter {
-  color: var(--darker-color-2);
+
+.container[data-which-shift="left"] .score-multiplier {
+  background-color: var(--main-color-2);
+}
+
+.letter-and-multiplier p {
+  cursor: pointer;
+  padding: 0.1em;
+  font-weight: 700;
+  font-size: 12rem;
+
+  border-right: 1px solid;
+}
+
+.container[data-which-shift="right"] .letter p {
+  color: var(--main-color-1);
+  border-color: var(--main-color-1);
+}
+.container[data-which-shift="left"] .letter p {
+  border-color: var(--main-color-2);
+  color: var(--main-color-2);
+}
+
+.container[data-which-shift="right"] .scores {
+  color: var(--main-color-1);
+}
+
+.container[data-which-shift="left"] .scores {
+  color: var(--main-color-2);
 }
 
 .letter.wrong {
-  animation: wrong-pressed-for-darker-color 0.8s ease-in-out;
+  animation: wrong-pressed-for-main-color 0.8s ease-in-out;
 }
 
 .scores {
-  font-size: 1.2rem;
-  position: absolute;
-
-  top: 0;
-  left: calc(50% - 12ch);
-  text-align: center;
-  opacity: 0.3;
-
-  font-weight: 100;
-
+  font-size: 1rem;
   padding: 1em;
+  opacity: 0.7;
+
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+
+  line-height: 1.3;
+  text-transform: uppercase;
+
+  align-self: center;
 }
 
-.scores * {
-  margin-bottom: 0.25em;
+.scores.hidden {
+  font-size: 0;
 }
 
-@keyframes wrong-pressed-for-darker-bgcolor {
+.scores.shown {
+  font-size: 1rem;
+}
+
+.scores:is(.hidden, .shown) {
+  transition: font-size 200ms ease-in-out;
+}
+
+.max-streak.record-set {
+  text-decoration: underline;
+}
+
+@keyframes wrong-pressed-for-main-bgcolor {
   0% {
-    background-color: var(--darker-color-1);
+    background-color: var(--main-color-1);
   }
   70% {
-    background-color: var(--darker-danger-color);
+    background-color: var(--main-danger-color);
   }
 
   100% {
-    background-color: var(--darker-color-1);
+    background-color: var(--main-color-1);
   }
 }
 
-@keyframes wrong-pressed-for-lighter-bgcolor {
+@keyframes wrong-pressed-for-secondary-bgcolor {
   0% {
-    background-color: var(--lighter-color-1);
+    background-color: var(--secondary-color-1);
   }
   70% {
-    background-color: var(--lighter-danger-color);
+    background-color: var(--secondary-danger-color);
   }
 
   100% {
-    background-color: var(--lighter-color-1);
+    background-color: var(--secondary-color-1);
   }
 }
 
-@keyframes wrong-pressed-for-darker-color {
+@keyframes wrong-pressed-for-main-color {
   0% {
-    color: var(--darker-color-1);
+    color: var(--main-color-1);
   }
   70% {
-    color: var(--darker-danger-color);
+    color: var(--main-danger-color);
   }
 
   100% {
-    color: var(--darker-color-1);
+    color: var(--main-color-1);
   }
 }
+/* Add dark mode -- DONE */
