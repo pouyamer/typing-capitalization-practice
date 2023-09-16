@@ -18,12 +18,12 @@ const config = {
       calculateDecayFunction: (updateInterval_MS, maxLastingTime_MS) =>
         updateInterval_MS / maxLastingTime_MS
     },
-    decrementation: {
+    penalty: {
       wrongShift: 4,
       wrongLetter: 2,
-      timeout: 2
+      idle: 2
     },
-    incrementation: {
+    award: {
       default: 10
     }
   }

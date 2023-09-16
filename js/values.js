@@ -14,9 +14,9 @@ const {
 } = config.score.multiplier
 
 const {
-  wrongShift: scoreDecrementAmount_WrongShift,
-  wrongLetter: scoreDecrementAmount_WrongLetter,
-  timeout: scoreDecrementAmount_TimeOut
-} = config.score.decrementation
+  wrongShift: scorePenalty_WrongShift,
+  wrongLetter: scorePenalty_WrongLetter,
+  idle: scorePenalty_idle
+} = config.score.penalty
 
-const { default: scoreIncrementAmount } = config.score.incrementation
+const { default: scoreAward } = config.score.award

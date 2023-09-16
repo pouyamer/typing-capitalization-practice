@@ -29,7 +29,7 @@ document.addEventListener("keypress", e => {
       typedLetters_correct++
       typedLetters++
 
-      score += scoreIncrementAmount * scoreMultiplier_current
+      score += scoreAward * scoreMultiplier_current
       scoreMultiplier_current = scoreMultiplier
 
       streak++
@@ -43,7 +43,7 @@ document.addEventListener("keypress", e => {
     } else {
       // add wrong animations to ui
       typedLetters++
-      score -= scoreDecrementAmount_WrongShift * scoreMultiplier
+      score -= scorePenalty_WrongShift * scoreMultiplier
       if (score < 0 && !allowNegativeScore) {
         score = 0
       }
@@ -55,7 +55,7 @@ document.addEventListener("keypress", e => {
       return
     }
   }
-  score -= scoreDecrementAmount_WrongLetter * scoreMultiplier
+  score -= scorePenalty_WrongLetter * scoreMultiplier
   typedLetters++
   streak = 0
 

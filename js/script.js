@@ -138,8 +138,7 @@ setInterval(() => {
     ${scoreMultiplier_current / scoreMultiplier})`
   if (scoreMultiplier_current === 1) {
     score -=
-      (scoreDecrementAmount_TimeOut * scoreMultiplier) /
-      scoreMultiplier_updateInterval_MS
+      (scorePenalty_idle * scoreMultiplier) / scoreMultiplier_updateInterval_MS
 
     if (!allowNegativeScore) {
       score = 0
