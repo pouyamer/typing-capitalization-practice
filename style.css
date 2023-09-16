@@ -98,6 +98,24 @@ body {
   align-self: center;
 }
 
+.letter.wrong {
+  animation: wrong 0.3s ease;
+}
+
+@keyframes wrong {
+  0% {
+    position: relative;
+    left: 10%;
+  }
+  50% {
+    left: -10%;
+  }
+  100% {
+    position: relative;
+    left: 0;
+  }
+}
+
 .letter-and-multiplier {
   position: relative;
 }
@@ -153,10 +171,6 @@ body {
   color: var(--main-color-2);
 }
 
-.letter.wrong {
-  animation: wrong-pressed-for-main-color 0.8s ease-in-out;
-}
-
 .scores {
   font-size: 1rem;
   padding: 1em;
@@ -185,43 +199,3 @@ body {
 .max-streak.record-set {
   text-decoration: underline;
 }
-
-@keyframes wrong-pressed-for-main-bgcolor {
-  0% {
-    background-color: var(--main-color-1);
-  }
-  70% {
-    background-color: var(--main-danger-color);
-  }
-
-  100% {
-    background-color: var(--main-color-1);
-  }
-}
-
-@keyframes wrong-pressed-for-secondary-bgcolor {
-  0% {
-    background-color: var(--secondary-color-1);
-  }
-  70% {
-    background-color: var(--secondary-danger-color);
-  }
-
-  100% {
-    background-color: var(--secondary-color-1);
-  }
-}
-
-@keyframes wrong-pressed-for-main-color {
-  0% {
-    color: var(--main-color-1);
-  }
-  70% {
-    color: var(--main-danger-color);
-  }
-
-  100% {
-    color: var(--main-color-1);
-  }
-}
-/* Add dark mode -- DONE */
